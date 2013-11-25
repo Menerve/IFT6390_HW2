@@ -1,0 +1,9 @@
+*.py[cod]
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
