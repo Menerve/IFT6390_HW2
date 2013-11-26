@@ -1,3 +1,7 @@
+#Alassane Ndiaye
+#David Krueger
+#Thomas Rohee
+
 import time
 import utilitaires
 import pylab
@@ -10,6 +14,7 @@ grid_size = 50
 irisSep = IrisSep.IrisSep()
 irisNotSep = IrisNotSep.IrisNotSep()
 twoMoons = TwoMoons.TwoMoons()
+
 
 def polynome(x, p=2):
     new_elements = np.zeros((x.shape[0]))
@@ -69,7 +74,7 @@ def results(model, dataset, epochs, epochs_to_display, display_errors, poly=[], 
                 t2 = time.clock()
                 print 'Took ', t2-t1, ' sec to predict'
             else:
-                print 'Trop de dimensions (', len(dataset.train_cols),') pour pouvoir afficher la surface de decision'
+                print 'Trop de dimensions (', len(dataset.train_cols), ') pour pouvoir afficher la surface de decision'
     else:
         model.train(dataset.train_set, epochs, epochs_to_display, display_errors)
 
@@ -102,9 +107,9 @@ def question21():
     # iris separable
     # Hyper-parameters
     mu = 0.1
-    cs = [10 * 10]
+    cs = [10 ** 10]
     epochs = 150
-    epochs_to_display = [10, 20, 100]
+    epochs_to_display = [10, 40, 100]
     display_errors = True
     batch = irisSep.train_set.shape[0]
 
@@ -115,7 +120,8 @@ def question21():
 
     # iris not separable
     # Hyper-parameters
-    cs = [0.01, 1, 10, 10 ** 3, 10 * 10]
+    cs = [0.01, 10, 10 ** 10]
+    epochs = 300
     epochs_to_display = []
     display_errors = False
     batch = irisNotSep.train_set.shape[0]
@@ -127,8 +133,8 @@ def question21():
 
     # 2moons
     # Hyper-parameters
-    cs = [0.0005, 0.001, 0.1, 1, 10, 10 ** 3]
-    epochs = 1000
+    cs = [0.0005, 0.001, 0.1, 1, 10 ** 10]
+    epochs = 10000
     batch = twoMoons.train_set.shape[0]
 
     for c in cs:
@@ -143,7 +149,7 @@ def question22():
     mu = 0.1
     cs = [0.0005, 0.001, 0.1, 10, 10 ** 3]
     poly = [2, 3, 4]
-    epochs = 1000
+    epochs = 10000
     epochs_to_display = []
     display_errors = False
     batch = twoMoons.train_set.shape[0]
@@ -158,7 +164,7 @@ def question23():
     # 2moons
     # Hyper-parameters
     mu = 0.1
-    cs = [0.001, 0.01]
+    cs = [0.001, 0.1, 10, 10 ** 10]
     epochs = 30000
     epochs_to_display = []
     display_errors = False
@@ -170,7 +176,8 @@ def question23():
         model = SVMKernel.SVMKernel(mu, c, batch, kernel_function)
         results(model, twoMoons, epochs, epochs_to_display, display_errors)
 
-    poly = [2, 3, 4]
+    cs = [0.001, 0.1, 10 ** 5, 10 ** 10]
+    poly = [2, 3, 4, 5, 6]
     kernel_function = kernels.polynomial_kernel
 
     for c in cs:
@@ -179,7 +186,8 @@ def question23():
             model = SVMKernel.SVMKernel(mu, c, batch, kernel_function, k=k)
             results(model, twoMoons, epochs, epochs_to_display, display_errors)
 
-    sigmas = [0.1, 0.2, 0.5]
+    cs = [0.001, 10 ** 10]
+    sigmas = [0.3, 0.4, 0.5]
     kernel_function = kernels.rbf_kernel
 
     for c in cs:

@@ -1,5 +1,10 @@
+#Alassane Ndiaye
+#David Krueger
+#Thomas Rohee
+
 import numpy as np
 from kernels import *
+
 
 class SVMKernel:
     def __init__(self, mu, c_errors, batch, kernel_function, k=2, sigma=1):
@@ -26,7 +31,7 @@ class SVMKernel:
         self.biais = 0
         n_examples = train_data.shape[0]
         data = train_data[:, :-1]
-        self.data = train_data
+        self.data = data
         targets = train_data[:, -1]
 
         for j in range(epochs):
@@ -46,7 +51,7 @@ class SVMKernel:
             data = []
             for j in range(len(test_data[i])):
                 data.append(test_data[i][j])
-            data.append(1)
+            # data.append(1)
             sorties.append(np.sign(self.alphas(self.data, data) + self.biais))
 
         return sorties

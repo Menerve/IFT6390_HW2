@@ -1,3 +1,7 @@
+#Alassane Ndiaye
+#David Krueger
+#Thomas Rohee
+
 import numpy as np
 
 
